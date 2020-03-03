@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="4.1.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.21" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="80.0.3987.10600" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="Twilio" Version="5.37.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="phantomjs.exe">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MyChromeDataSelenium\Crashpad\reports\" />
+    <Folder Include="MyChromeDataSelenium\Default\blob_storage\73d57b80-e7fa-4cfb-8773-50b38783c5db\" />
+    <Folder Include="MyChromeDataSelenium\Default\CertificateRevocation\" />
+    <Folder Include="MyChromeDataSelenium\Default\Crashpad\reports\" />
+    <Folder Include="MyChromeDataSelenium\Default\Crowd Deny\" />
+    <Folder Include="MyChromeDataSelenium\Default\Default\blob_storage\b9d4a318-5dc1-4390-9885-c86a8c81a7c3\" />
+    <Folder Include="MyChromeDataSelenium\Default\FileTypePolicies\" />
+    <Folder Include="MyChromeDataSelenium\Default\MEIPreload\" />
+    <Folder Include="MyChromeDataSelenium\Default\OriginTrials\" />
+    <Folder Include="MyChromeDataSelenium\Default\PepperFlash\" />
+    <Folder Include="MyChromeDataSelenium\Default\pnacl\" />
+    <Folder Include="MyChromeDataSelenium\Default\RecoveryImproved\" />
+    <Folder Include="MyChromeDataSelenium\Default\SafetyTips\" />
+    <Folder Include="MyChromeDataSelenium\Default\SSLErrorAssistant\" />
+    <Folder Include="MyChromeDataSelenium\Default\Subresource Filter\Unindexed Rules\" />
+    <Folder Include="MyChromeDataSelenium\Default\SwReporter\" />
+    <Folder Include="MyChromeDataSelenium\Default\ThirdPartyModuleList64\" />
+    <Folder Include="MyChromeDataSelenium\Default\TLSDeprecationConfig\" />
+    <Folder Include="MyChromeDataSelenium\Default\WidevineCdm\" />
+    <Folder Include="MyChromeDataSelenium\MEIPreload\" />
+    <Folder Include="MyChromeDataSelenium\OriginTrials\" />
+    <Folder Include="MyChromeDataSelenium\RecoveryImproved\" />
+    <Folder Include="MyChromeDataSelenium\SwReporter\" />
+    <Folder Include="MyChromeDataSelenium\WidevineCdm\" />
+  </ItemGroup>
+
+</Project>
