@@ -19,8 +19,7 @@ namespace PublixSubSale
             string tenderSub = await WebRequest.RequestPublixBread();
             Console.WriteLine(tenderSub);
 
-            //maybe email also?
-           // Console.Read();
+            // Console.Read();
         }
 
 
@@ -58,48 +57,28 @@ namespace PublixSubSale
                 //get jsonString
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(pageContents);
-                var script = doc.DocumentNode.Descendants().Where(x => x.Name == "script").Where(x => x.InnerText.Contains("window.pblxDataLayer")).FirstOrDefault().InnerText;
+                var script = doc.DocumentNode.Descendants().Where(x => x.HasClass("savings-and-promotion")).FirstOrDefault();
 
-                var scriptMod = script.Replace("window.pblxDataLayer =", "");
-
-
-                int index = scriptMod.IndexOf("var loadAttempts");
-                if (index > 0)
+                if (script != null)
                 {
-                    scriptMod = scriptMod.Substring(0, index);
-                }
-                var chickenSandwichData = scriptMod.Replace("};", "}");
-                var jobject = JsonConvert.DeserializeObject<RootObject>(chickenSandwichData);
-
-
-
-                driver.Quit();
-                driver.Dispose();
-
-                //File.WriteAllText("C:\\temp\\htmltext.txt", chickenSandwichData);
-
-                if (jobject.products.price != null)
-                {
-                    if (jobject.products.price.Contains("6.09"))
+                    var savingText = script.ChildNodes.Where(x => x.HasClass("savings")).FirstOrDefault().InnerText;
+                    if (!string.IsNullOrEmpty(script.InnerHtml) && !string.IsNullOrEmpty(savingText))
                     {
-                        MsgChickenTenderSub = "Chicken Tender Sub is not on sale :(";
+                        MsgChickenTenderSub = "Chicken Tender Sub at Publix is on sale!!! " + savingText;
                         TwiSend.SendTwilio(MsgChickenTenderSub);
-                    }
-
-                    else
-                    {
-                        MsgChickenTenderSub = "Chicken Tender Sub is on sale!!!";
-                        TwiSend.SendTwilio(MsgChickenTenderSub);
-                        //email or text error
                     }
                 }
 
                 else
                 {
-                    MsgChickenTenderSub = "Can't get data correctly, fix profile if possible.";
+                    MsgChickenTenderSub = "Chicken Tender Sub at Publix is not on sale :(";
                     TwiSend.SendTwilio(MsgChickenTenderSub);
-                    //email or text error
                 }
+
+                driver.Quit();
+                driver.Dispose();
+
+                //File.WriteAllText("C:\\temp\\htmltext.txt", chickenSandwichData);
 
                 // js.ExecuteScript("console.log(" + location.PhysicalLocation.Latitude + ")");
 
@@ -115,7 +94,7 @@ namespace PublixSubSale
 
         }
 
-      
+
 
 
     }
