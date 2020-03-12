@@ -40,15 +40,16 @@ namespace PublixSubSale
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(sourceData);
                 var script = doc.DocumentNode.Descendants().Where(x => x.HasClass("savings-and-promotion")).FirstOrDefault();
-
-                if (script != null )
+                var savingText = script.ChildNodes.Where(x => x.HasClass("savings")).FirstOrDefault();
+                if (script != null && savingText != null )
                 {
-                    var savingText = script.ChildNodes.Where(x => x.HasClass("savings")).FirstOrDefault().InnerText;
-                    if (!string.IsNullOrEmpty(script.InnerHtml) && !string.IsNullOrEmpty(savingText) )
-                    {
-                        MsgChickenTenderSub = "Chicken Tender Sub at Publix is on sale!!! " + savingText;
-                        TwiSend.SendTwilio(MsgChickenTenderSub);
-                    }
+               
+                        if (!string.IsNullOrEmpty(script.InnerHtml) && !string.IsNullOrEmpty(savingText.InnerText))
+                        {
+                            MsgChickenTenderSub = "Chicken Tender Sub at Publix is on sale!!! " + savingText;
+                            TwiSend.SendTwilio(MsgChickenTenderSub);
+                        }
+                    
                 }
 
                 else
